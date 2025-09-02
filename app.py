@@ -3,8 +3,9 @@ import polars as pl
 import joblib
 from streamlit_option_menu import option_menu
 
-# --- Caching the Model ---
-# This decorator ensures the model is loaded only once, making the app faster.
+
+st.set_page_config(layout="wide") 
+
 @st.cache_resource
 def load_model():
     """Loads the pre-trained insurance model pipeline."""
@@ -53,11 +54,7 @@ if selection == "Prediction":
     region = st.selectbox('Region', ['southwest', 'southeast', 'northwest', 'northeast'])
 
     # --- Prediction Logic ---
-
-    # A button to trigger the prediction
     if st.button('Predict Charges'):
-        # 1. Create a Polars DataFrame from the user's input
-        # The model expects a DataFrame, so we create one with a single row.
         input_data = pl.DataFrame({
             'age': [age],
             'bmi': [bmi],
@@ -67,10 +64,9 @@ if selection == "Prediction":
             'region': [region]
         })
 
-        # 2. Make a prediction
-        # The .predict() method returns a numpy array, so we get the first element.
         prediction = model.predict(input_data)[0]
 
         # 3. Display the result
         st.subheader("Predicted Insurance Charge")
+
         st.write(f"**${prediction:,.2f}**")

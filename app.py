@@ -3,15 +3,17 @@ import polars as pl
 import joblib
 from streamlit_option_menu import option_menu
 
+st.set_page_config(layout="wide")
+
 st.markdown(
-    
+    """
     <style>
     [data-testid="stSidebar"] {
-        width: 400px
+        width: 350px !important;
     }
     </style>
-    ,
-    unsafe_allow_html=True,
+    """,
+    unsafe_allow_html=True
 )
 
 @st.cache_resource
@@ -78,4 +80,5 @@ if selection == "Prediction":
         st.subheader("Predicted Insurance Charge")
 
         st.write(f"**${prediction:,.2f}**")
+
 

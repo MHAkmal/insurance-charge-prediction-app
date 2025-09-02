@@ -9,7 +9,7 @@ st.markdown(
     """
     <style>
     [data-testid="stSidebar"] {
-        width: 250px !important;
+        width: 300px !important;
     }
     </style>
     """,
@@ -80,6 +80,7 @@ if selection == "Prediction":
         st.subheader("Predicted Insurance Charge")
 
         st.write(f"**${prediction:,.2f}**")
+
 
 
 
